@@ -1,21 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-paper";
-import { useNavigation } from "expo-router";
+import { Button, IconButton } from "react-native-paper";
+import { router } from "expo-router";
 export default function Page() {
-  const navigation = useNavigation();
-  const HomePage = () => {
-    navigation.navigate("home");
+  const handleHomePress = () => {
+    router.push("/apps/home");
   };
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Button
+        <IconButton
           icon="home"
           mode="contained"
-          onPress={HomePage}
+          onPress={handleHomePress}
           style={{ margin: 50 }}
-        ></Button>
-        <HomePage/>
+        ></IconButton>
       </View>
     </View>
   );
