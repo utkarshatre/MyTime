@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { FlatList, ScrollView } from "react-native";
+// import { FlatList, ScrollView } from "react-native";
 
 import React from "react";
 import { View, StyleSheet } from "react-native";
@@ -7,7 +7,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Searchbar, Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Catagories from "./Catagories";
-
 const ScreenOptions = () => {
   return (
     <Tabs.Screen

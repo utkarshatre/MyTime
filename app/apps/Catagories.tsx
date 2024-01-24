@@ -11,32 +11,54 @@ import React, { useState } from "react";
 type ItemData = {
   id: string;
   title: string;
+  icon: string;
 };
 
 export const DATA: ItemData[] = [
   {
     id: "1",
     title: "All",
+    icon: "☰",
   },
   {
     id: "2",
-    title: "First Item",
+    title: "Makeup Artist",
+    icon: "👩",
   },
   {
     id: "3",
-    title: "Second Item",
+    title: "Fitness",
+    icon: "💪🏻",
   },
   {
     id: "4",
-    title: "Third Item",
+    title: "Restaurants",
+    icon: "🍷",
   },
   {
     id: "5",
-    title: "Forth Item",
+    title: "Food Stall",
+    icon: "🥘",
   },
   {
     id: "6",
-    title: "Fifth Item",
+    title: "Bakery",
+    icon: "🧁",
+  },
+  {
+    id: "7",
+    title: "Politics",
+    icon: "🚨",
+  },
+  {
+    id: "8",
+    icon: "👔",
+    title: "Clothing",
+  },
+  {
+    id: "9",
+    icon: "🗒",
+    title: "Others",
   },
 ];
 type ItemProps = {
@@ -47,19 +69,22 @@ type ItemProps = {
 };
 
 const Item = ({ item, onPress, backgroundColor, textColor }: ItemProps) => (
-  <TouchableOpacity
-    onPress={onPress}
-    style={[styles.item, { backgroundColor }]}
-  >
-    <Text style={[styles.title, { color: textColor }]}>{item.title}</Text>
-  </TouchableOpacity>
+  <View>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.item, { backgroundColor }]}
+    >
+      <Text style={styles.icon}>{item.icon}</Text>
+    </TouchableOpacity>
+    <Text style={styles.title}>{item.title}</Text>
+  </View>
 );
 const Catagories = () => {
   const [selectedId, setSelectedId] = useState<string>();
 
   const renderItem = ({ item }: { item: ItemData }) => {
     const backgroundColor = item.id === selectedId ? "CDB7F6" : "white";
-    const color = item.id === selectedId ? "white" : "black";
+    const color = item.id === selectedId ? "CDB7F6" : "black";
 
     return (
       <Item
@@ -98,9 +123,22 @@ const styles = StyleSheet.create({
     borderColor: "black",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "yellow",
     // flexDirection: "row", // Set flexDirection to row
   },
   title: {
-    fontSize: 10,
+    fontSize: 11,
+    alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    textAlign: "center",
+    fontSize: 45,
+    alignItems: "center",
+    height: 70,
+    width: 70,
+    borderRadius: 50,
+    backgroundColor: "#FFFF9E",
   },
 });

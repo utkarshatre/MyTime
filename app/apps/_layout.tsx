@@ -20,6 +20,34 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
+        name="addpost"
+        options={{
+          tabBarLabel: "Add Post",
+          tabBarIcon: (props) => {
+            return (
+              <Icon
+                {...props}
+                name="plus-circle"
+                size={35}
+                paddingLeft={12}
+                paddingTop={12}
+                justifyContent={"center"}
+                alignItems={"center"}
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  bottom: 15,
+                  width: 60,
+                  height: 60,
+                  borderRadius: 50,
+                  backgroundColor: "orange",
+                }}
+              />
+            );
+          },
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           tabBarLabel: "Profile",
