@@ -7,6 +7,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Searchbar, Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Catagories from "./Catagories";
+import { ScrollView } from "react-native-gesture-handler";
+import PostFeed from "./PostFeed";
 const ScreenOptions = () => {
   return (
     <Tabs.Screen
@@ -24,7 +26,7 @@ const home = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
   return (
     <>
-      <View>
+      <View style={styles.container}>
         <ScreenOptions />
 
         <View style={styles.header}>
@@ -43,16 +45,17 @@ const home = () => {
             .
           </Button>
         </View>
-
-        <View>
-          <Catagories />
-        </View>
+        <Catagories />
+        <PostFeed />
       </View>
     </>
   );
 };
 export default home;
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",

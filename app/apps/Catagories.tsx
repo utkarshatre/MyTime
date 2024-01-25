@@ -115,7 +115,7 @@ export default Catagories;
 const styles = StyleSheet.create({
   item: {
     marginRight: 3,
-    margin: 2,
+    marginBottom: 30,
     height: 80,
     width: 80,
     borderRadius: 50,
