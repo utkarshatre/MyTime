@@ -5,12 +5,13 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 
 import { Video, ResizeMode } from "expo-av";
 import React, { useRef } from "react";
 import { ScrollView } from "react-native";
-
+import { List } from "react-native-paper";
 export const UserData = [
   {
     id: "1",
@@ -53,6 +54,9 @@ export const UserData = [
 
     post: {
       image: require("./ProfileAssests/id3.jpg"),
+      image: require("./ProfileAssests/id1.jpg"),
+      image: require("./ProfileAssests/id2.jpg"),
+
       caption: "GoodMorning! with new stock",
     },
   },
@@ -113,11 +117,15 @@ const PostFeed = () => {
                   }}
                   source={item.post.video}
                   useNativeControls
-                  resizeMode={ResizeMode.CONTAIN}
+                  resizeMode={ResizeMode.COVER}
                   isLooping
+                  shouldPlay
                   onPlaybackStatusUpdate={(status) => setStatus(() => status)}
                 />
               )}
+              {/* {item.post.image>1 && (
+                
+              )} */}
             </View>
             <View>
               <Text
