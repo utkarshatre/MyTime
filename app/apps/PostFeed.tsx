@@ -98,7 +98,7 @@ const PostFeed = () => {
                   style={{
                     borderRadius: 20,
                     width: screenWidth,
-                    height: 300,
+                    height: screenWidth,
                   }}
                   source={item.post.image}
                 />
@@ -109,7 +109,7 @@ const PostFeed = () => {
                   style={{
                     borderRadius: 20,
                     width: screenWidth,
-                    height: 300,
+                    height: screenWidth,
                   }}
                   source={item.post.video}
                   useNativeControls
