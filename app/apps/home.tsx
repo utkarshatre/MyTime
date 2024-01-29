@@ -7,7 +7,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Searchbar, Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Catagories from "./Catagories";
-import { ScrollView } from "react-native-gesture-handler";
 import PostFeed from "./PostFeed";
 const ScreenOptions = () => {
   return (
@@ -32,18 +31,18 @@ const home = () => {
         <View style={styles.header}>
           <Searchbar
             style={styles.searchbar}
-            placeholder="Connect with NearBy People."
+            placeholder="Your Needs are NearBy..."
             onChangeText={setSearchQuery}
             value={searchQuery}
           />
-          <Button
-            style={styles.icon}
+          {/* <Button
+            style={styles.icon}        //Ankit Sir updates about to remove it
             icon="phone"
             mode="contained"
             onPress={() => console.log("Pressed")}
           >
             .
-          </Button>
+          </Button> */}
         </View>
         <Catagories />
         <PostFeed />
@@ -63,11 +62,13 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   searchbar: {
-    marginLeft: 100,
-    marginRight: 5,
-    borderRadius: 5,
-    height: 50,
-    width: 330,
+    // marginLeft: 100,
+    // marginRight: 5,
+    // alignItems:"center",
+    // justifyContent:"center",
+    borderRadius: 20,
+    // height: 50,
+    // width: 330,
   },
   icon: {
     marginRight: 50,

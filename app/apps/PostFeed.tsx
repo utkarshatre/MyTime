@@ -11,7 +11,8 @@ import {
 import { Video, ResizeMode } from "expo-av";
 import React, { useRef } from "react";
 import { ScrollView } from "react-native";
-import { List } from "react-native-paper";
+import { PlaybackMixin } from "expo-av/build/AV";
+import Swiper from "react-native-swiper";
 export const UserData = [
   {
     id: "1",
@@ -50,12 +51,24 @@ export const UserData = [
     id: "4",
     name: "Person 4",
     username: "ghi",
-    profile: require("./ProfileAssests/id3.jpg"),
+    profile: require("./ProfileAssests/id1.jpg"),
 
     post: {
       image: require("./ProfileAssests/id3.jpg"),
-      image: require("./ProfileAssests/id1.jpg"),
-      image: require("./ProfileAssests/id2.jpg"),
+
+      caption: "GoodMorning! with new stock",
+    },
+  },
+  {
+    id: "5",
+    name: "Person 5",
+    username: "ghi",
+    profile: require("./ProfileAssests/id1.jpg"),
+
+    post: {
+      image3: require("./ProfileAssests/id3.jpg"),
+      image1: require("./ProfileAssests/id1.jpg"),
+      image2: require("./ProfileAssests/id2.jpg"),
 
       caption: "GoodMorning! with new stock",
     },
@@ -67,7 +80,6 @@ const PostFeed = () => {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
 
-  const screenHeight = Dimensions.get("window").height;
   return (
     <ScrollView>
       {UserData.map((item) => (
@@ -107,6 +119,7 @@ const PostFeed = () => {
                   source={item.post.image}
                 />
               )}
+
               {item.post.video && (
                 <Video
                   ref={video}
@@ -118,25 +131,70 @@ const PostFeed = () => {
                   source={item.post.video}
                   useNativeControls
                   resizeMode={ResizeMode.COVER}
-                  isLooping
-                  shouldPlay
                   onPlaybackStatusUpdate={(status) => setStatus(() => status)}
                 />
               )}
-              {/* {item.post.image>1 && (
-                
-              )} */}
-            </View>
-            <View>
-              <Text
-                style={{
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                {item.name}
-              </Text>
-              <Text>{item.post.caption}</Text>
+
+              {item.post.image1 && item.post.image2 && item.post.image3 && (
+               
+               <ScrollView
+                scrollEnabled
+                decelerationRate="normal" 
+                  horizontal
+                  showsHorizontalScrollIndicator={true}
+                  style={{ flexDirection: 'row', overflow:"hidden"
+                 }}
+                >
+                  <Image
+                    style={{
+                      alignItems: "center",
+
+                      justifyContent: "center",
+                      borderRadius: 20,
+                      width: screenWidth,
+                      height: screenWidth,
+                    }}
+                    source={item.post.image1}
+                  />
+                  <Image
+                    style={{
+                      alignItems: "center",
+
+                  justifyContent: "center",
+                      marginHorizontal:10,
+                      borderRadius: 20,
+                      width: screenWidth,
+                      height: screenWidth,
+                    }}
+                    source={item.post.image2}
+                  />
+                  <Image
+                    style={{
+                      alignItems: "center",
+
+                  justifyContent: "center",
+                      marginHorizontal:10,
+                      borderRadius: 20,
+                      width: screenWidth,
+                      height: screenWidth,
+                    }}
+                    source={item.post.image3}
+                  />
+                </ScrollView>
+            
+              )}
+
+              <View>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {item.name}
+                </Text>
+                <Text>{item.post.caption}</Text>
+              </View>
             </View>
           </View>
         </TouchableOpacity>
@@ -146,6 +204,8 @@ const PostFeed = () => {
 };
 
 export default PostFeed;
+
+
 
 const styles = StyleSheet.create({});
 
