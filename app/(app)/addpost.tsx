@@ -6,6 +6,7 @@ const ScreenOptions = () => {
     <Tabs.Screen
       options={{
         title: "addpost",
+        
       }}
     />
   );

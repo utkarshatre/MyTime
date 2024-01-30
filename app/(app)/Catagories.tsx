@@ -114,28 +114,30 @@ export default Catagories;
 
 const styles = StyleSheet.create({
   item: {
-    marginRight: 3,
-    marginBottom: 30,
+    flex: 1,
+    margin: 6,
+    padding: 3,
     height: 80,
     width: 80,
     borderRadius: 50,
     borderWidth: 3,
     borderColor: "black",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
     backgroundColor: "yellow",
-    // flexDirection: "row", // Set flexDirection to row
+    flexDirection: "row", // Set flexDirection to row
   },
   title: {
+    paddingBottom: 3,
     fontSize: 11,
     alignItems: "center",
     textAlign: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   },
   icon: {
     textAlign: "center",
     fontSize: 45,
-    alignItems: "center",
+    alignItems: "flex-start",
     height: 70,
     width: 70,
     borderRadius: 50,

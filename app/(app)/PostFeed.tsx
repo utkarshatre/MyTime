@@ -84,7 +84,8 @@ const PostFeed = () => {
     <ScrollView>
       {UserData.map((item) => (
         <TouchableOpacity key={item.id} style={{ margin: 2 }}>
-          <View style={{ marginTop: 10 }}>
+          <View > 
+            {/* flatlist */}
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 style={{

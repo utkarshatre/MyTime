@@ -3,7 +3,10 @@ import { Button, IconButton } from "react-native-paper";
 import { router } from "expo-router";
 export default function Page() {
   const handleHomePress = () => {
-    router.push("/apps/home");
+    router.push("/(app)/(tab)/home");
+  };
+  const handleAddPostPress = () => {
+    router.push("/(app)/addpost");
   };
   return (
     <View style={styles.container}>
@@ -12,6 +15,12 @@ export default function Page() {
           icon="home"
           mode="contained"
           onPress={handleHomePress}
+          style={{ margin: 50 }}
+        ></IconButton>
+        <IconButton
+          icon="plus"
+          mode="contained"
+          onPress={handleAddPostPress}
           style={{ margin: 50 }}
         ></IconButton>
       </View>
