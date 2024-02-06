@@ -17,10 +17,10 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
-        name="contacts"
+        name="chatbox"
         options={{
-          tabBarLabel: "Contacts",
-          tabBarIcon: (props) => <Icon {...props} name="contacts" />,
+          tabBarLabel: "ChatBox",
+          tabBarIcon: (props) => <Icon {...props} name="chat" />,
         }}
       />
       <Tabs.Screen

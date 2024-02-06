@@ -114,21 +114,21 @@ export default Catagories;
 
 const styles = StyleSheet.create({
   item: {
-    flex: 1,
-    margin: 6,
-    padding: 3,
+     flex:1,
+    margin:6,
+    padding:3,
     height: 80,
     width: 80,
     borderRadius: 50,
     borderWidth: 3,
     borderColor: "black",
     justifyContent: "space-evenly",
-    alignItems: "center",
+     alignItems: "center",
     backgroundColor: "yellow",
     flexDirection: "row", // Set flexDirection to row
   },
   title: {
-    paddingBottom: 3,
+    paddingBottom:3,
     fontSize: 11,
     alignItems: "center",
     textAlign: "center",

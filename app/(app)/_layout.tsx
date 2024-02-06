@@ -3,7 +3,7 @@ const ScreenOptions = () => {
   return (
     <Stack.Screen
       options={{
-        headerShown: false,
+        // headerShown: false,
       }}
     />
   );
@@ -15,18 +15,18 @@ const AppLayout = () => {
       <Stack
         screenOptions={
           {
-            // headerShown: false ,
+             headerShown: false ,
           }
         }
       >
         <Stack.Screen
           name="(tab)/home"
-          options={{
-            headerShown: false,
-          }}
+          // options={{
+          //   headerShown: false,
+          // }}
         />
-        <Stack.Screen name="addpost" />
-        {/* <Stack.Screen name="index" /> */}
+        <Stack.Screen name="addpost" /> 
+        
       </Stack>
     </>
   );

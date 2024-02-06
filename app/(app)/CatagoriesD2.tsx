@@ -1,6 +1,5 @@
 import {
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -14,6 +13,7 @@ type ItemData = {
   icon: string;
   keyword: string;
   backgroundcolor: string;
+  textColor: string;
 };
 
 export const DATA: ItemData[] = [
@@ -23,6 +23,7 @@ export const DATA: ItemData[] = [
     icon: "☰",
     keyword: "keyword1, keyword2, keyword3",
     backgroundcolor: "#CDB7F6",
+    textColor: "#303030",
   },
   {
     id: "2",
@@ -30,6 +31,7 @@ export const DATA: ItemData[] = [
     icon: "👩",
     keyword: "keyword1, keyword2, keyword3",
     backgroundcolor: "#FFFF9E",
+    textColor: "#7F5A37",
   },
   {
     id: "3",
@@ -37,68 +39,74 @@ export const DATA: ItemData[] = [
     icon: "💪🏻",
     keyword: "keyword1, keyword2, keyword3",
     backgroundcolor: "#D6AA8D",
+    textColor: "#654321",
   },
   {
     id: "4",
     title: "Restaurants",
     icon: "🍷",
     keyword: "keyword1, keyword2, keyword3",
-    backgroundcolor: "#FF4F4B",
-  },
+    backgroundcolor: "#FF817E",
+    textColor: "white", },
   {
     id: "5",
     title: "Food Stall",
     icon: "🥘",
     keyword: "keyword1, keyword2, keyword3",
-    backgroundcolor: "#FF817E",
+    backgroundcolor: "#FF8533",
+    textColor: "#FFFFE3", 
   },
+  
   {
     id: "6",
     title: "Bakery",
     icon: "🧁",
     keyword: "keyword1, keyword2, keyword3",
-    backgroundcolor: "pink",
+    backgroundcolor: "#FF6666",
+    textColor: "white",
   },
   {
     id: "7",
     title: "Politics",
     icon: "🚨",
     keyword: "keyword1, keyword2, keyword3",
-    backgroundcolor: "#FFC299",
+    backgroundcolor: "#FFA366",
+    textColor: "w#EDEDED", 
   },
   {
     id: "8",
     icon: "👔",
     title: "Clothing",
     keyword: "keyword1, keyword2, keyword3",
-    backgroundcolor: "#A4C7FD",
-  },
+    backgroundcolor: "#9ACDED",
+    textColor: "yellow", },
   {
     id: "9",
     icon: "🗒",
     title: "Others",
     keyword: "keyword1, keyword2, keyword3",
-    backgroundcolor: "#E2E2E2",
-  },
+    backgroundcolor: "#D0D0D0",
+    textColor: "black", },
 ];
 type ItemProps = {
   item: ItemData;
   onPress: () => void;
   backgroundColor: string;
+  textColor: string;
 };
 
-const Item = ({ backgroundColor, item, onPress }: ItemProps) => (
+const Item = ({ textColor, backgroundColor, item, onPress }: ItemProps) => (
   <View>
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.item, { backgroundColor, flexDirection: "row" }]}
+      style={[styles.item, { backgroundColor,flexDirection: "row" }]}
     >
-      <View style={{ flexDirection: "column" }}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.keyword}>{item.keyword}</Text>
+      <View style={{ flexDirection: "column"}}>
+        <Text style={[styles.title, {color:textColor}]}>{item.title}</Text>
+        <Text style={[styles.keyword,{color:textColor}]}>{item.keyword}</Text>
       </View>
       <View style={{ flexDirection: "column", alignItems: "center" }}>
-        <Text style={styles.icon}>{item.icon}</Text>
+        <Text style={[styles.icon,{color:textColor}]}>{item.icon}</Text>
       </View>
     </TouchableOpacity>
   </View>
@@ -110,12 +118,13 @@ const Catagories = () => {
   const renderItem = ({ item }: { item: ItemData }) => {
     const backgroundColor =
       item.id === selectedId ? item.backgroundcolor : item.backgroundcolor;
-    //  const color = item.id === selectedId ? "CDB7F6" : "black";
+    const textColor = item.id === selectedId ? item.textColor : item.textColor;
 
     return (
       <Item
         item={item}
         backgroundColor={backgroundColor}
+        textColor={textColor}
         onPress={() => setSelectedId(item.id)}
       />
     );
@@ -137,22 +146,26 @@ export default Catagories;
 
 const styles = StyleSheet.create({
   item: {
-    justifyContent: "center",
+    marginVertical:35,
+    marginHorizontal:15,
+    // justifyContent: "center",
     borderRadius: 10,
-    margin: 10,
-    padding: 10,
+  
+    
   },
   title: {
+    marginHorizontal: 10,
+    marginTop: 5,
+    textAlign: "center",
     fontWeight: "bold",
-    flex: 1,
     fontSize: 20,
   },
   keyword: {
+    margin: 5,
     fontSize: 15,
   },
   icon: {
-    marginHorizontal: 10,
-    marginLeft: 10,
+    margin: 5,
     fontSize: 40,
   },
 });

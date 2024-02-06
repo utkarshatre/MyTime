@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "403083314691",
+    "project_id": "mytimeapp-2ab16",
+    "storage_bucket": "mytimeapp-2ab16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403083314691:android:dfaf9bb7aea279171bb036",
+        "android_client_info": {
+          "package_name": "com.anonymous.MyTimeAppsdk49"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEN9zGaZZVGxIVHj1N4DxZf1cy-ZqOVe4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

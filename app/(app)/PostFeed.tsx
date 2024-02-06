@@ -89,6 +89,7 @@ const PostFeed = () => {
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 style={{
+                  marginTop:5,
                   height: 30,
                   width: 30,
                   borderRadius: 15,

@@ -1,5 +1,4 @@
 import { Stack } from "expo-router";
-import { FlatListComponent } from "react-native";
 
 const RootLayout = () => {
   return (
@@ -15,7 +14,7 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen name="(app)/addpost" />
-      {/* <Stack.Screen name="index" /> */}
+    <Stack.Screen name="index" /> 
     </Stack>
   );
 };
