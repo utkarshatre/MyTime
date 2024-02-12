@@ -29,7 +29,7 @@ const home = () => {
   };
   return (
     <SafeAreaView style={styles.container1}>
-      <StatusBar barStyle="dark-content" backgroundColor="white" />
+      <StatusBar/>
       <View style={styles.container2}>
         <Searchbar
           style={styles.searchbar}
@@ -50,6 +50,10 @@ const home = () => {
 };
 export default home;
 const styles = StyleSheet.create({
+  status:{
+    // barStyle="dark-content",
+    // backgroundColor="white" 
+  },
   container1: {
     flex: 1,
   },

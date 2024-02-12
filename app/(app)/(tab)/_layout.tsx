@@ -7,6 +7,7 @@ const _layout = () => {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tabs.Screen
@@ -17,16 +18,17 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
-        name="chatbox"
+        name="contact"
         options={{
-          tabBarLabel: "ChatBox",
-          tabBarIcon: (props) => <Icon {...props} name="chat" />,
+          // href: null,
+          tabBarLabel: "Contacts",
+          tabBarIcon: (props) => <Icon {...props} name="contacts" />,
         }}
       />
       <Tabs.Screen
         name="addpost"
         options={{
-          href: null,
+          // href: null,
           tabBarLabel: "Add Post",
           tabBarIcon: (props) => {
             return <Icon {...props} name="plus-circle" />;

@@ -15,14 +15,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.MyTimeAppsdk49"
+      "package": "com.anonymous.MyTimeAppsdk49",
+      "runtimeVersion": "1.0.0"
     },
     "scheme": "your-app-scheme",
     "web": {
@@ -30,6 +34,17 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "f5cab0a3-4f51-4af5-aaaf-8dbec9834bcf"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/f5cab0a3-4f51-4af5-aaaf-8dbec9834bcf"
+    }
   }
 }

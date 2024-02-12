@@ -68,7 +68,7 @@ type ItemProps = {
   textColor: string;
 };
 
-const Item = ({ item, onPress, backgroundColor, textColor }: ItemProps) => (
+const Item = ({ item, onPress, backgroundColor, textColor }: emProps) => (
   <View>
     <TouchableOpacity
       onPress={onPress}

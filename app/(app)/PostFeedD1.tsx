@@ -6,11 +6,13 @@ import {
   Image,
   View,
   Dimensions,
+  Button,
 } from "react-native";
-import { Avatar, Card, Text } from "react-native-paper";
+import { Avatar, Card, Text, Title } from "react-native-paper";
 import { ImageSourcePropType } from "react-native";
-import { Video } from "expo-av";
+import { AVPlaybackSource, Video } from "expo-av";
 import { SliderBox } from "react-native-image-slider-box";
+import { router } from "expo-router";
 
 type UserData = {
   id: string;
@@ -18,7 +20,7 @@ type UserData = {
   username: string;
   profile: any;
   images: ImageSourcePropType[];
-  videos: Video;
+  videos: any;
   caption: string;
 };
 
@@ -48,8 +50,9 @@ export const DATA: UserData[] = [
     profile: require("./ProfileAssests/id2.jpg"),
     images: [],
     videos: [
-      require("./ProfileAssests/video1.mp4"),
-      require("./ProfileAssests/video1.mp4"),
+      {
+        uri: "https://firebasestorage.googleapis.com/v0/b/mytimeapp-2ab16.appspot.com/o/video1.mp4?alt=media&token=076cbb98-0512-4bcf-9e54-ec3e8c716475",
+      },
     ],
     caption: "Good Morning! with new stock",
   },
@@ -97,12 +100,12 @@ const ImageCarousel: FC<{ images: ImageSourcePropType[] }> = ({ images }) => (
   />
 );
 
-const VideoSection: FC<{ videos: string[] }> = ({ videos }) => (
+const VideoSection: FC<{ videos: AVPlaybackSource[] }> = ({ videos }) => (
   <FlatList
     data={videos}
     horizontal
     showsHorizontalScrollIndicator={false}
-    pagingEnabled
+    pagingEnabled={true}
     //  keyExtractor={(item, index) => index.toString()}
     keyExtractor={(index) => index.toString()}
     renderItem={({ item }) => (
@@ -110,15 +113,17 @@ const VideoSection: FC<{ videos: string[] }> = ({ videos }) => (
     )}
   />
 );
-
+const handleProfile =()=>{
+  router.push("../(tab)/profile"); 
+}
 const Item: FC<ItemProps> = ({ data, onPress }) => (
-  <Card onPress={onPress} style={styles.card}>
+  <Card onPress={handleProfile} style={styles.card}>
     <Card.Title
       title={data.name}
       left={(props) => <Avatar.Icon {...props} icon={data.profile} />}
     />
     {data.videos.length > 0 ? (
-      <VideoSection type="video" videos={data.videos} />
+      <VideoSection videos={data.videos} />
     ) : (
       <SliderBox images={data.images} dotColor="orange" style={styles.image} />
       // <ImageCarousel images={data.images}/>
