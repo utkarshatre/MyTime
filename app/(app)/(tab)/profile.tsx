@@ -1,4 +1,158 @@
+// import {
+//   FlatList,
+//   Image,
+//   ImageSourcePropType,
+//   Linking,
+//   SafeAreaView,
+//   ScrollView,
+//   StyleSheet,
+//   Text,
+//   View,
+// } from "react-native";
+// import React, { FC, useEffect, useState } from "react";
+// import { Banner, Button, Chip, Icon } from "react-native-paper";
+// import PostFeedD1 from "../PostFeedD1";
+// // import { db, analytics, collection, getDocs } from "../../../firebase";
+// import firestore from "@react-native-firebase/firestore";
+// import { auth } from "../../../firebase";
+// import { Tabs } from "expo-router";
+// const Item = ({ item }) => {
+//   const [visible, setVisible] = React.useState(true);
+
+//   const handleCallPress = () => {
+//     Linking.openURL(`tel:${item.contact}`);
+//   };
+//   return (
+//     <SafeAreaView>
+//       <View style={styles.container1}>
+//         <Banner visible={visible} style={styles.containerbanner}>
+//           <View style={styles.containerprofile}>
+//             <View style={styles.profile}>
+//               <Image style={styles.profileimage} source={item.profilepicture} />
+//               <View style={styles.profiletext}>
+//                 <Text style={styles.nameut}>{item.name}</Text>
+//                 <Text> {auth.currentUser.email}</Text>
+//                 <Text style={styles.aboutut}>{item.about}</Text>
+//                 <View style={styles.contactut}>
+//                   <Button
+//                     icon="phone"
+//                     mode="text"
+//                     onPress={() => {
+//                       handleCallPress();
+//                       console.log("Pressed");
+//                     }}
+//                   >
+//                     Call me!
+//                   </Button>
+//                   <Button
+//                     icon="message"
+//                     mode="text"
+//                     onPress={() => {
+//                       console.log("Pressed");
+//                     }}
+//                   >
+//                     Ping Me!
+//                   </Button>
+//                 </View>
+//               </View>
+//             </View>
+//           </View>
+//         </Banner>
+//         <ScrollView style={styles.containerut}>
+//           {/* <PostFeedD1 /> */}
+//         </ScrollView>
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// const Profile = () => {
+//   const [profilePostFeedData, setprofilePostFeedData] = useState([]);
+//   const getProfilePostFeed = async () => {
+//     const querySnapshot = await firestore().collection("users").get();
+//     const postData = querySnapshot.docs.map((doc) => ({
+//       id: doc.id,
+//       ...doc.data(),
+//     }));
+//     console.log(postData);
+//     setprofilePostFeedData(postData);
+//   };
+//   useEffect(() => {
+//     getProfilePostFeed();
+//   }, []);
+
+//   return (
+//     <View>
+//       <FlatList
+//         data={profilePostFeedData}
+//         renderItem={({ item }) => <Item item={item} />}
+//         keyExtractor={(item) => item.id}
+//         extraData={setprofilePostFeedData}
+//       />
+//     </View>
+//   );
+// };
+
+// export default Profile;
+
+// const styles = StyleSheet.create({
+//   container1: {},
+//   containerprofile: {
+//     flexDirection: "column",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     width: "100%",
+//     height: "100%",
+//     flex: 1,
+//   },
+//   profile: {
+//     marginTop: 50,
+//     flexDirection: "row",
+//   },
+//   profileimage: {
+//     marginLeft: 10,
+//     borderRadius: 150,
+//     height: 110,
+//     width: 110,
+//   },
+//   profiletext: {
+//     height: 110,
+//     width: "100%",
+//     flexDirection: "column",
+//     marginLeft: 15,
+//   },
+//   nameut: {
+//     fontSize: 30,
+//     fontWeight: "bold",
+//   },
+//   aboutut: {
+//     width: 200,
+//     fontSize: 14,
+//   },
+//   contactut: {
+//     flexDirection: "row",
+//     justifyContent: "flex-start",
+//     alignItems: "flex-start",
+//   },
+//   containerbanner: {},
+//   containerut: {
+//     marginLeft: 10,
+//   },
+//   imageut: {
+//     width: 120,
+//     height: 120,
+//     borderRadius: 20,
+//     margin: 10,
+//   },
+//   imageRowut: {
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//   },
+// });
+
 import {
+  Dimensions,
+  FlatList,
   Image,
   ImageSourcePropType,
   SafeAreaView,
@@ -8,7 +162,8 @@ import {
   View,
 } from "react-native";
 import React, { FC, useState } from "react";
-import { Banner, Button } from "react-native-paper";
+import { Banner, Button, Chip, Searchbar } from "react-native-paper";
+import PostFeedD1 from "../PostFeedD1";
 
 type UserData = {
   idut: string;
@@ -41,16 +196,41 @@ export const DATA: UserData[] = [
 
 type ItemProps = {
   item: UserData;
-  // onPress: () => void;
+  onPress: () => void;
 };
 
+// const HorizontalScrollView = ({ titleut, imagesut }) => (
+//   <View>
+//      <Text style={styles.aboutut}>{titleut}</Text>
+//     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+//       <View style={styles.imageRowut}>
+//         {imagesut.map((imgut, indexut) => (
+//           <Image key={indexut} source={imgut} style={styles.imageut} />
+//         ))}
+//       </View>
+//     </ScrollView>
+//   </View>
+// );
+const ITEM_LENGTH = Dimensions.get("screen").width - 10;
+const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = React.useState("");
+
+  return (
+    <Searchbar
+      placeholder="Search"
+      onChangeText={setSearchQuery}
+      value={searchQuery}
+    />
+  );
+};
 const HorizontalScrollView = ({ titleut, imagesut }) => (
   <View>
-    <Text style={styles.aboutut}>{titleut}</Text>
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      <View style={styles.imageRowut}>
+   
+
+    <ScrollView>
+      <View style={styles.parent}>
         {imagesut.map((imgut, indexut) => (
-          <Image key={indexut} source={imgut} style={styles.imageut} />
+          <Image key={indexut} source={imgut} style={styles.child} />
         ))}
       </View>
     </ScrollView>
@@ -63,47 +243,14 @@ const Item = ({ item }: ItemProps) => {
   return (
     <SafeAreaView>
       <View style={styles.container1}>
-        <Banner visible={visible}>
-          <View style={styles.containerprofile}>
-            <View style={styles.profile}>
-              <Image style={styles.profileimage} source={item.profileut} />
-              <View style={styles.profiletext}>
-                <Text style={styles.nameut}>{item.nameut}</Text>
-                <Text style={styles.aboutut}>{item.aboutut}</Text>
-                <View style={styles.contactut}>
-                  <Button
-                    icon="phone"
-                    mode="text"
-                    onPress={() => console.log("Pressed")}
-                  >
-                    Call me!
-                  </Button>
-                  <Button
-                    icon="message"
-                    mode="text"
-                    onPress={() => console.log("Pressed")}
-                  >
-                    Ping Me!
-                  </Button>
-                </View>
-              </View>
-            </View>
-          </View>
-        </Banner>
-
-        <View style={styles.containerut}>
-          <ScrollView>
-            <HorizontalScrollView
-              titleut="On Demands"
-              imagesut={item.imageut}
-            />
-            <HorizontalScrollView titleut="Trendings" imagesut={item.imageut} />
-            <HorizontalScrollView
-              titleut="Live Offers"
-              imagesut={item.imageut}
-            />
-          </ScrollView>
-        </View>
+       
+          <View style={styles.containerSearchBox}>
+         <SearchBar  />
+         </View>
+        {/* <ScrollView style={styles.containerut}> */}
+         
+          <HorizontalScrollView titleut={item.nameut} imagesut={item.imageut} />
+        {/* </ScrollView> */}
       </View>
     </SafeAreaView>
   );
@@ -166,20 +313,59 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
+  containerbanner: {},
   containerut: {
-    flexDirection: "row",
+    marginHorizontal: 1,
   },
-  imageut: {
-    width: 120,
-    height: 120,
+  parent: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "100%",
+    height: "100%",
+    marginHorizontal: 5, //1
+    marginTop: 10, //1
+    marginBottom: 60, //1
+    // marginHorizontal: 20,  //2
+    // // marginTop: 10,   //2
+    // margin: 60,   //2
+  },
+  child: {
+    // width: 120,  //1
+    // height: 120,  //1
+    width: 175, //2
+    height: 175, //2
+    borderRadius: 10,
+    margin: 5,
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  containerSearchBox: {
+    marginTop: 35, //3 for search bar
+    marginBottom: 30,
+    marginLeft: 30,
+    marginRight: 10,
     borderRadius: 20,
-    margin: 10,
-  },
-  imageRowut: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    alignItems: "center",
+    justifyContent: "center",
+    // height: 30,
+    width: 330,
   },
 });
+
+{
+  /* <HorizontalScrollView
+              titleut="On Demands"
+              imagesut={item.imageut}
+            />
+            <HorizontalScrollView titleut="Trendings" imagesut={item.imageut} />
+            <HorizontalScrollView
+              titleut="Live Offers"
+              imagesut={item.imageut}
+            /> */
+}
 
 // profileut: {
 //   flexDirection: "row",

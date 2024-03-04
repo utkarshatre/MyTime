@@ -1,19 +1,22 @@
-import React, { useState } from "react";
 import {
+  KeyboardAvoidingView,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
+import React from "react";
 import {
   Avatar,
   Button,
   Card,
+  Chip,
   SegmentedButtons,
   TextInput,
 } from "react-native-paper";
 import { router } from "expo-router";
+import home from "./(tab)/home";
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
@@ -42,17 +45,19 @@ const SegmentButton = () => {
 };
 
 const AddVideoPost = () => {
-  const [Title, setTitle] = useState("");
-  const [Content, setContent] = useState("");
-  const [segmentValue, setSegmentValue] = useState("");
-
-  const handleAddPost = () => {
-    router.push("../(tab)/home");
-  };
   // const handleAddPost = () => {
-  //   router.push("addpost");
+  //   router.navigate("./(tab)/home");    //direct go to home
   // };
+  const handleCancel = () => {
+    router.push("./home");
+  };
+  const [Title, setTitle] = React.useState("");
+  const [Content, setContent] = React.useState("");
+  const [Keywords, setKeywords] = React.useState([]);
 
+  const handleChipPress = (keyword) => {
+    setKeywords((prevKeywords) => [...prevKeywords, keyword]);
+  };
   return (
     <Card style={styles.card}>
       <ScrollView>
@@ -73,38 +78,60 @@ const AddVideoPost = () => {
             Galary
           </Button>
         </View>
+
         <Card.Content style={styles.content}>
-          <TextInput
-            variant="titleLarge"
-            label="CardTitle"
-            mode="outlined"
-            value={Title}
-            onChangeText={(title) => setTitle(title)}
-          />
           <TouchableOpacity>
             <Card.Cover
               style={styles.image}
               source={require("../(app)/ProfileAssests/defaultvideo.png")}
             />
           </TouchableOpacity>
+
+          <TextInput
+            // variant="bodyMedium"
+            mode="outlined"
+            label="Caption"
+            value={Content}
+            onChangeText={(Content) => setContent(Content)}
+          />
           <TextInput
             style={styles.keywords}
-            variant="titleLarge"
+            // variant="titleLarge"
             label="Keywords"
             mode="outlined"
-            value={Title}
-            onChangeText={(Title) => setTitle(Title)}
+            value={Keywords.join(", ")} // Display joined keywords in TextInput
+            onChangeText={(keywords) => setKeywords(keywords.split("."))} // Update Keywords state when typing
           />
         </Card.Content>
-        <SegmentButton />
+        <View style={styles.chipContainer}>
+          <Chip
+            style={{ margin: 10 }}
+            onPress={() => handleChipPress("keyword1")}
+          >
+            keyword1
+          </Chip>
+          <Chip
+            style={{ margin: 10 }}
+            onPress={() => handleChipPress("keyword2")}
+          >
+            keyword2
+          </Chip>
+          <Chip
+            style={{ margin: 10 }}
+            onPress={() => handleChipPress("keyword3")}
+          >
+            keyword3
+          </Chip>
+        </View>
         <Card.Actions>
-          <Button onPress={handleAddPost}>Cancel</Button>
+          <Button onPress={handleCancel}>Cancel</Button>
           <Button onPress={() => ""}>Post Now</Button>
         </Card.Actions>
       </ScrollView>
     </Card>
   );
 };
+export default AddVideoPost;
 
 const styles = StyleSheet.create({
   card: {
@@ -131,8 +158,12 @@ const styles = StyleSheet.create({
     height: 40,
   },
   image: {
-    marginTop: 20,
+    marginVertical: 10,
+  },
+  chipContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    margin: 10,
   },
 });
-
-export default AddVideoPost;

@@ -53,14 +53,14 @@
 //   );
 // };
 // export default ChatScreen;
-// {
-//   /* <Text style={styles.personName}>{item.name}</Text>
-//         <Button
-//           style={styles.callButton}
-//           icon="phone"
-//           mode="contained"
-//           onPress={() => console.log("Pressed")}
-//         >
-//           Call
-//         </Button> */
-// }
+{
+  /* <Text style={styles.personName}>{item.name}</Text>
+        <Button
+          style={styles.callButton}
+          icon="phone"
+          mode="contained"
+          onPress={() => console.log("Pressed")}
+        >
+          Call
+        </Button> */
+}

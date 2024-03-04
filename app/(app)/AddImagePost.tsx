@@ -6,52 +6,65 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Avatar,
   Button,
   Card,
+  Chip,
   SegmentedButtons,
   TextInput,
 } from "react-native-paper";
 import { router } from "expo-router";
-import home from "./(tab)/home";
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
-
-const SegmentButton = () => {
-  const [value, setValue] = React.useState("");
-
-  return (
-    <SafeAreaView style={styles.container1}>
-      <SegmentedButtons
-        value={value}
-        onValueChange={setValue}
-        buttons={[
-          {
-            value: "filter",
-            label: "Filter1",
-          },
-          {
-            value: "train",
-            label: "Filter2",
-          },
-          { value: "drive", label: "Filter3" },
-        ]}
-      />
-    </SafeAreaView>
-  );
-};
-
 const AddImagePost = () => {
-  // const handleAddPost = () => {
-  //   router.navigate("./(tab)/home");    //direct go to home
-  // };
-  const handleAddPost = () => {
-    router.push("addpost");
-  };
-  const [Title, setTitle] = React.useState("");
+  // const [Title, setTitle] = React.useState("");
   const [Content, setContent] = React.useState("");
+  const [Keywords, setKeywords] = React.useState([]);
+  const apiUrl =
+    "http://192.168.4.27:3000/users/kQUpGMpStgcd0Hp2JnSVQQlvEOh2/posts";
+  const data = {
+    caption: Content,
+    images: "./ProfileAssests/id1.jpg",
+    keywords: Keywords,
+  };
+  console.log(data);
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  const handlePost = async () => {
+    fetch(apiUrl, requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        response.json();
+      })
+
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+  useEffect(() => {
+    handlePost();
+  }, []);
+
+  const handleCancel = () => {
+    router.push("./home");
+  };
+
+  const handleChipPress = (keyword) => {
+    // Add the clicked keyword to the Keywords state
+    setKeywords((prevKeywords) => [...prevKeywords, keyword]);
+  };
+
   return (
     <Card style={styles.card}>
       <ScrollView>
@@ -72,7 +85,6 @@ const AddImagePost = () => {
             Galary
           </Button>
         </View>
-
         <Card.Content style={styles.content}>
           <TouchableOpacity>
             <Card.Cover
@@ -82,31 +94,52 @@ const AddImagePost = () => {
           </TouchableOpacity>
 
           <TextInput
-            variant="bodyMedium"
+            // variant="bodyMedium"
             mode="outlined"
-            label="Card Content"
+            label="Caption"
             value={Content}
-            onChangeText={(Content) => setContent(Content)}
+            onChangeText={(content) => setContent(content)}
           />
           <TextInput
             style={styles.keywords}
-            variant="titleLarge"
+            // variant="titleLarge"
             label="Keywords"
             mode="outlined"
-            value={Title}
-            onChangeText={(Title) => setTitle(Title)}
+            value={Keywords.join(", ")} // Display joined keywords in TextInput
+            onChangeText={(keywords) => setKeywords(keywords.split(", "))} // Update Keywords state when typing
           />
         </Card.Content>
-        <SegmentButton />
+        <View style={styles.chipContainer}>
+          <Chip
+            style={styles.chipchild}
+            // style={{ margin: 10}}
+            onPress={() => handleChipPress("Makeup Artist")}
+          >
+            Makeup Artist
+          </Chip>
+          <Chip
+            style={styles.chipchild}
+            // style={{ margin: 10 }}
+            onPress={() => handleChipPress("Fitness")}
+          >
+            Fitness
+          </Chip>
+          <Chip
+            style={styles.chipchild}
+            // style={{ margin: 10 }}
+            onPress={() => handleChipPress("Restaurants")}
+          >
+            Restaurants
+          </Chip>
+        </View>
         <Card.Actions>
-          <Button onPress={handleAddPost}>Cancel</Button>
-          <Button onPress={() => ""}>Post Now</Button>
+          <Button onPress={handleCancel}>Cancel</Button>
+          <Button onPress={handlePost}>Post Now</Button>
         </Card.Actions>
       </ScrollView>
     </Card>
   );
 };
-export default AddImagePost;
 
 const styles = StyleSheet.create({
   card: {
@@ -135,4 +168,17 @@ const styles = StyleSheet.create({
   image: {
     marginVertical: 10,
   },
+  chipContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    margin: 1,
+  },
+  chipchild: {
+    flexWrap: "wrap",
+    alignItems: "center",
+    margin: 1,
+  },
 });
+
+export default AddImagePost;

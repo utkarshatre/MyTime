@@ -12,6 +12,8 @@ import {
 } from "react-native";
 
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { auth } from "../../../firebase";
+import { Button } from "react-native-paper";
 const SECTIONS = [
   {
     header: "Preferences",
@@ -138,7 +140,7 @@ const SettingScreen = () => {
             <Text style={styles.profileName}>Profile 1</Text>
 
             <Text style={styles.profileAddress}>
-              123, Xyz Area, City, Country.
+              <Text style={styles.profileName}>{auth.currentUser.email}</Text>
             </Text>
           </View>
         </View>
@@ -181,6 +183,15 @@ const SettingScreen = () => {
             })}
           </View>
         ))}
+        <Button
+          style={{ marginHorizontal: 80 }}
+          mode="text"
+          onPress={() => {
+            auth.signOut().then(() => console.log("User signed out!"));
+          }}
+        >
+          SignOut
+        </Button>
       </ScrollView>
     </SafeAreaView>
   );
@@ -198,8 +209,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-   profileAvatarWrapper: {
-  //   position: 'relative',
+  profileAvatarWrapper: {
+    //   position: 'relative',
   },
   profileAvatar: {
     width: 72,
@@ -207,16 +218,16 @@ const styles = StyleSheet.create({
     borderRadius: 9999,
   },
   profileAction: {
-  //   position: 'absolute',
-  //   right: -4,
-  //   bottom: -10,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   width: 28,
-  //   height: 28,
-  //   borderRadius: 9999,
-  //   backgroundColor: '#007bff',
-   },
+    //   position: 'absolute',
+    //   right: -4,
+    //   bottom: -10,
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    //   width: 28,
+    //   height: 28,
+    //   borderRadius: 9999,
+    //   backgroundColor: '#007bff',
+  },
   profileName: {
     marginTop: 10,
     fontSize: 19,

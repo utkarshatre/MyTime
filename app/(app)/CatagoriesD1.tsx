@@ -68,21 +68,24 @@ type ItemProps = {
   textColor: string;
 };
 
-const Item = ({ item, onPress, backgroundColor, textColor }: emProps) => (
+const Item = ({ item, onPress, backgroundColor, textColor }: ItemProps) => (
   <View>
     <TouchableOpacity
       onPress={onPress}
       style={[styles.item, { backgroundColor }]}
-    >   
-     {/* THIS IS FOR SEARCH KEYWORD TYPE BOX WITH ICON AND TITLE */}
-      <Text style={styles.titleicon}>{item.icon}{item.title}</Text>
-      
+    >
+      {/* THIS IS FOR SEARCH KEYWORD TYPE BOX WITH ICON AND TITLE */}
+      <Text style={styles.titleicon}>
+        {item.icon}
+        {item.title}
+      </Text>
     </TouchableOpacity>
     {/*  THIS IS FOR BUTTON TYPE CIRCLES
     <Text style={styles.title}>{item.title}</Text> */}
   </View>
 );
-const Catagories = () => {      //THIS IS FOR SIMPLE BOX TYPE ITEMS
+const Catagories = () => {
+  //THIS IS FOR SIMPLE BOX TYPE ITEMS
   const [selectedId, setSelectedId] = useState<string>();
 
   const renderItem = ({ item }: { item: ItemData }) => {
@@ -116,23 +119,22 @@ const Catagories = () => {      //THIS IS FOR SIMPLE BOX TYPE ITEMS
 export default Catagories;
 
 const styles = StyleSheet.create({
-  item:{
-    marginVertical: 20,
-    marginLeft: 5,
-    borderRadius: 20,
-    borderColor:"black",
-    alignItems: "center",
-    
-     borderWidth: 3,
-  },
-  titleicon:{
-    backgroundColor: "#FFFF9E",
-    borderColor:"black",
-    padding: 10,
+  item: {
+    // marginVertical: 20,
     // marginLeft: 5,
-    fontSize: 16,
-    fontWeight: "bold",
-    borderRadius: 20,
+    // borderRadius: 20,
+    // borderColor: "black",
+    // alignItems: "center",
+    // borderWidth: 3,
+  },
+  titleicon: {
+    // backgroundColor: "#FFFF9E",
+    // borderColor: "black",
+    // padding: 10,
+    // // marginLeft: 5,
+    // fontSize: 16,
+    // fontWeight: "bold",
+    // borderRadius: 20,
   },
   // item: {                        THIS IS FOR BUTTON TYPE CIRCLES
   //    flex:1,
